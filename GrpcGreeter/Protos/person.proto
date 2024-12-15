@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcGreeter.Protos";
+package PersonService;
+
+// تعریف مدل 
+message Person {
+    string first_name = 1;
+    string last_name = 2;
+    string national_code = 3;
+    string birth_date = 4;
+}
+
+// CRUD operations
+service PersonService {
+    rpc CreatePerson (Person) returns (PersonResponse);
+    rpc GetPerson (PersonRequest) returns (Person);
+    rpc UpdatePerson (Person) returns (PersonResponse);
+    rpc DeletePerson (PersonRequest) returns (PersonResponse);
+}
+
+// درخواست برای دریافت یا حذف یک یوزر
+message PersonRequest {
+    string national_code = 1;  // برای پیدا کردن فرد با کد ملی
+}
+
+message PersonResponse {
+    string message = 1;
+    bool success = 2;
+}
